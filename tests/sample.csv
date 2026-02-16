@@ -1,0 +1,6 @@
+ID,Title,Description,State,Justification,Category,Interaction,Source,Target
+T-001,SQL Injection,Attacker injects malicious SQL via the login form.,Mitigated,Parameterised queries implemented across all database calls.,Injection,User submits login form,Browser,Database
+T-002,Broken Authentication,Weak password policy allows brute-force attacks.,Open,No account lockout policy is currently in place.,Authentication,User authenticates,Browser,Auth Service
+T-003,Sensitive Data Exposure,PII transmitted over unencrypted HTTP in legacy endpoint.,Accepted,Legacy endpoint scheduled for decommission within 30 days; risk accepted.,Cryptography,Client requests report,Client,Legacy API
+T-004,Cross-Site Scripting,Reflected XSS in the search results page.,Mitigated,Output is HTML-encoded using the framework's built-in escaping.,XSS,User performs search,Browser,Web Server
+T-005,Insecure Direct Object Reference,Users can access other users' reports by changing the ID in the URL.,Open,Access control checks are missing on the report endpoint.,Access Control,User requests report,Browser,Report Service

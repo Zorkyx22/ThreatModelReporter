@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# Output
+output/*.pdf
+output/*.typ
+
+# Coverage
+.coverage
+htmlcov/
+
+# Editors
+.vscode/
+.idea/
+*.swp
