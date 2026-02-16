@@ -36,7 +36,7 @@ def test_find_typst_not_found_raises():
 
 def test_write_data_typ_creates_csv(tmp_path):
     threats = [
-        {"ID": "T-001", "Title": "XSS", "Description": "...", "State": "Open", "Justification": "Pending"},
+        {"Id": "T-001", "Title": "XSS", "Description": "...", "State": "Applicable", "Justification": "Pending"},
     ]
     dest = tmp_path / "threats.csv"
     _write_data_typ(threats, dest)
@@ -56,10 +56,10 @@ def test_write_data_typ_empty_list_does_nothing(tmp_path):
 
 SAMPLE_THREATS = [
     {
-        "ID": "T-001",
+        "Id": "T-001",
         "Title": "SQL Injection",
         "Description": "Attacker injects SQL.",
-        "State": "Open",
+        "State": "Applicable",
         "Justification": "No fix yet.",
     }
 ]

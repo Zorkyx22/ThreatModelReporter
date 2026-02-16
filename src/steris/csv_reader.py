@@ -62,7 +62,6 @@ def read_threats(csv_path: Path, delimiter: str) -> list[Threat]:
         if missing:
             raise CSVValidationError(
                 f"CSV is missing required column(s): {', '.join(sorted(missing))}\n"
-                f"Only the following columns were found:\n{', '.join(sorted(headers))}"
             )
 
         threats: list[Threat] = []
