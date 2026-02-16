@@ -51,6 +51,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="Threat Modeling Report",
         help="Report title (default: 'Threat Modeling Report').",
     )
+    parser.add_argument(
+        "-d", "--delimiter",
+        default=",",
+        help="CSV file delimiter (default: ','. If saved by Microsoft Excel, should be changed to ';')",
+    )
     return parser
 
 
@@ -59,7 +64,7 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        threats = read_threats(args.input)
+        threats = read_threats(args.input, args.delimiter)
     except FileNotFoundError as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

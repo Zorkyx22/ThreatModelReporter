@@ -47,11 +47,10 @@
 
 #let status-color(s) = {
   let sl = lower(s)
-  if sl == "open"        { rgb("#c0392b") }
+  if sl == "applicable"     { rgb("#c0392b") }
   else if sl == "mitigated" { rgb("#27ae60") }
-  else if sl == "accepted"  { rgb("#e67e22") }
-  else if sl == "transferred" { rgb("#8e44ad") }
-  else                   { luma(80) }
+  else if sl == "not applicable" { rgb("#7f8c8d") }
+  else                      { luma(80) }
 }
 
 #let status-badge(s) = box(
@@ -83,10 +82,9 @@
 
 #let count-status(s) = threats.filter(t => lower(t.at("State", default: "")) == s).len()
 
-#let open-count       = count-status("open")
-#let mitigated-count  = count-status("mitigated")
-#let accepted-count   = count-status("accepted")
-#let transferred-count = count-status("transferred")
+#let applicable-count     = count-status("applicable")
+#let mitigated-count      = count-status("mitigated")
+#let not-applicable-count = count-status("not applicable")
 
 This report documents *#threats.len() threats* identified during the threat modeling activity.
 
@@ -96,10 +94,9 @@ This report documents *#threats.len() threats* identified during the threat mode
   fill: (_, row) => if calc.odd(row) { luma(245) } else { white },
   inset: (x: 8pt, y: 5pt),
   [*Status*], [*Count*],
-  [#status-badge("open")],        [#open-count],
-  [#status-badge("mitigated")],   [#mitigated-count],
-  [#status-badge("accepted")],    [#accepted-count],
-  [#status-badge("transferred")], [#transferred-count],
+  [#status-badge("applicable")],     [#applicable-count],
+  [#status-badge("mitigated")],      [#mitigated-count],
+  [#status-badge("not applicable")], [#not-applicable-count],
 )
 
 #pagebreak()
@@ -113,7 +110,7 @@ This report documents *#threats.len() threats* identified during the threat mode
 // Interaction value changes.
 
 #for (i, threat) in threats.enumerate() {
-  let id            = threat.at("ID",           default: "—")
+  let id            = threat.at("Id",           default: "—")
   let name          = threat.at("Title",         default: "—")
   let description   = threat.at("Description",  default: "—")
   let status        = threat.at("State",         default: "—")

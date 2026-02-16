@@ -41,10 +41,10 @@ The input CSV must have these columns (additional columns are passed through):
 
 | Column | Required | Description |
 |---|---|---|
-| `ID` | Yes | Unique threat identifier (e.g. `T-001`) |
+| `Id` | Yes | Unique threat identifier (e.g. `T-001`) |
 | `Title` | Yes | Short threat name |
 | `Description` | Yes | Full threat description |
-| `State` | Yes | `Open`, `Mitigated`, `Accepted`, or `Transferred` |
+| `State` | Yes | `Applicable`, `Mitigated`, or `Not Applicable` |
 | `Justification` | Yes | Reasoning for the current state |
 | `Category` | No | Threat category (e.g. `Injection`) |
 | `Interaction` | No | The interaction that exposes the threat |
