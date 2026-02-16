@@ -8,7 +8,7 @@ from typing import TypedDict
 
 
 REQUIRED_COLUMNS = {
-    "ID",
+    "Id",
     "Title",
     "Description",
     "State",
@@ -35,7 +35,7 @@ class CSVValidationError(Exception):
     pass
 
 
-def read_threats(csv_path: Path) -> list[Threat]:
+def read_threats(csv_path: Path, delimiter: str) -> list[Threat]:
     """Parse a threat modeling CSV file and return a list of threat dicts.
 
     Args:
@@ -52,7 +52,7 @@ def read_threats(csv_path: Path) -> list[Threat]:
         raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
     with csv_path.open(newline="", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
+        reader = csv.DictReader(f, delimiter=delimiter)
 
         if reader.fieldnames is None:
             raise CSVValidationError("CSV file is empty or has no header row.")
@@ -61,7 +61,8 @@ def read_threats(csv_path: Path) -> list[Threat]:
         missing = REQUIRED_COLUMNS - headers
         if missing:
             raise CSVValidationError(
-                f"CSV is missing required column(s): {', '.join(sorted(missing))}"
+                f"CSV is missing required column(s): {', '.join(sorted(missing))}\n"
+                f"Only the following columns were found:\n{', '.join(sorted(headers))}"
             )
 
         threats: list[Threat] = []
